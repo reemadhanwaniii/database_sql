@@ -2,3 +2,6 @@
 
 
 getting this error because user table already contains null values so first we have to either alter rows and delete that rows
+
+![Uploading image.png…]()
+
