@@ -1,0 +1,67 @@
+-- CREATE DATABASE Ecommerce
+--     DEFAULT CHARACTER SET = 'utf8mb4';
+
+
+
+use ecommerce;
+
+create table user(
+    id int PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    age INT
+);
+
+
+
+insert into user (id,first_name,last_name,age) values (1,"reema","dhanwani",23);
+
+select * from user;
+
+
+insert into user (id,first_name,last_name,age) values (2,"shivangi","singh",25), (4,"yachna","dhanwani",28),(5,"divya","gunwani",21);
+
+alter table `user` MODIFY age INT NOT NULL;
+
+delete from `user` where first_name="yashika";
+
+select * from `user` u where u.last_name="dhanwani" or u.first_name="Reema";
+
+select * from user u where age between 23 and 27;
+
+select * from user u where age>=21 and age <= 28 ORDER BY u.first_name limit 3 offset 2;
+
+create table `order`(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    user_id int NOT NULL,
+    price int,
+    FOREIGN key (user_id) REFERENCES user(id)
+);
+
+insert into `order` (price,user_id) values (128,5);
+
+select * from `order`;
+
+TRUNCATE `order`;
+
+drop table `order`;
+
+
+insert into `order` (price,user_id) values (3000,1),(26677,1),(50000,4),(635656,3),(36565,4);
+
+select * from `user` u join `order` o where u.id = o.user_id; 
+select u.id,u.first_name,u.last_name,o.id as order_id,price from `user` u join `order` o where u.id=o.user_id;
+
+select * from `order` inner JOIN `user` where order.user_id = user.id;
+
+select * from `user` LEFT JOIN `order` on user.id = order.user_id;
+
+select * from `user` RIGHT JOIN `order` on user.id = order.user_id;
+
+select * from `user` CROSS JOIN `order`;
+
+-- full outer join
+
+select * from `user` LEFT JOIN `order` on user.id = order.user_id
+UNION
+SELECT * from `user` RIGHT JOIN `order` on user.id = order.user_id;
