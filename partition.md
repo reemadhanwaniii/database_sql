@@ -77,3 +77,15 @@ You cannot add a partition after it, because nothing is supposed to go beyond MA
 
  Solution: Drop pmax, then re-add it
 
+## Creating views 
+
+CREATE VIEW booking_2025 AS
+SELECT
+    TABLE_NAME, PARTITION_NAME, TABLE_ROWS
+FROM
+    information_schema.PARTITIONS
+WHERE
+    TABLE_NAME = 'booking';
+
+
+select * from booking_2025;
