@@ -55,3 +55,25 @@ ALTER TABLE booking
 ADD PARTITION (
     PARTITION p202509 VALUES LESS THAN (202510)
 );
+## 
+In MySQL, the partition key must be part of every UNIQUE/PRIMARY key.
+
+n MySQL partitioning, conditions like LESS THAN are a bit tricky — because MySQL doesn't support LESS THAN OR EQUAL TO directly in partition definitions<img width="1048" height="604" alt="image" src="https://github.com/user-attachments/assets/0e56ca84-cff5-4e45-952b-dcd95adfd5ef" />
+
+
+
+
+
+<img width="464" height="77" alt="image" src="https://github.com/user-attachments/assets/c781c59b-ffd3-4032-b21f-ed55d58e0e05" />
+
+
+In MySQL:
+
+MAXVALUE means: "this is the last possible partition"
+
+So it must always be the final one
+
+You cannot add a partition after it, because nothing is supposed to go beyond MAXVALUE
+
+ Solution: Drop pmax, then re-add it
+
